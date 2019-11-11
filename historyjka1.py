@@ -3,7 +3,6 @@ from tkinter import filedialog
 calls = []
 calls_counter = 0
 def open_file():
-
    result =  filedialog.askopenfile(initialdir="/", title="wybierz plik", filetypes=(("text files", ".txt"), ("all files", "*.*")))
    print(result)
    safe_tab = [] #tablica która przechowuje poszczególne wyrazy z każdej linijki using
@@ -24,7 +23,6 @@ def open_file():
                     break
    for i in range (0, calls_counter):
        print("wywolanie numer ", i + 1, "zawiera: ", calls[i])
-
 def exit() :
     sys.exit()
 root = Tk()
