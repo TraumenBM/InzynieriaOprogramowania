@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import os
 import re
-# from tkinter import *
-# from tkinter import filedialog
-from Tkinter import *
-import tkFileDialog as filedialog
-import FileReader as filereader
+from tkinter import *
+from tkinter import filedialog
+# from Tkinter import *
+# import tkFileDialog as filedialog
+# import FileReader as filereader
 
 #klasa interfejs użytkownika
 class IU:
