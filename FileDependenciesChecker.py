@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import UserInterface as userinterface
 
 files = []

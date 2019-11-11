@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 import os
+import re
 #import plików
 from Parsers.PhpParser import PhpParser
 from Parsers.CppParser import CppParser
@@ -19,7 +21,6 @@ class FileReader:
 
 #metoda do odczytu plików
     def readFiles(self, files):
-        print(files)
 
         '''
         dla kazdej nazwy pliku wybieramy ścieżkę do tego pliku i rozszeżenie
@@ -35,13 +36,15 @@ class FileReader:
             filepath, extension = os.path.splitext(fileName)
 
             parser = self.parsers.get(extension)
+            if not parser:
+                continue
 
             file = open(fileName, 'r')
             file = parser.removeComments(file.read())
             dependencies = parser.findDependencies(file)
             dependencies = self.checkFilesExistance(files, dependencies)
             self.dependencies[fileName] = dependencies
-        #print (self.dependencies)
+        print (self.dependencies)
 
     '''
     metoda do sprawdzania czy podany plik istnieje w zestawie plików wejściowych
@@ -49,8 +52,9 @@ class FileReader:
     def checkFilesExistance(self, files, dependencies):
         existedFiles = []
         for dep in dependencies:
+            dep = re.sub(r'[\\|/]', os.path.sep, dep, 0)
             depPath = os.path.abspath(dep)
-            print(depPath)
+            # print(depPath)
             if depPath in files:
                 existedFiles.append(depPath)
         return existedFiles

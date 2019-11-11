@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #biblioteka do wyrażeń regularnych i operacji systemowych
 import os
 import re
