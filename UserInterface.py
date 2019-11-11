@@ -5,7 +5,7 @@ from tkinter import *
 from tkinter import filedialog
 # from Tkinter import *
 # import tkFileDialog as filedialog
-# import FileReader as filereader
+import FileReader as filereader
 
 #klasa interfejs użytkownika
 class IU:
