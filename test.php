@@ -1,6 +1,6 @@
 <?php
 
-require "sdfad.sf";
+require "test.cpp";
 
 // asdfsd
 /*

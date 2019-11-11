@@ -1,20 +1,36 @@
 import os
+#import plików
 from Parsers.PhpParser import PhpParser
 from Parsers.CppParser import CppParser
-from Parsers.PythonParser import PythonParser
+from Parsers.PyParser import PyParser
 
-
+#klasa fileReader
 class FileReader:
 
+    #tablica asocjacyjna zależności między plikami
     dependencies = {}
 
+    #tablica parserów z konkretnymi rodzajami plików
     parsers = {
         '.php': PhpParser(),
         '.cpp': CppParser(),
-        '.py': PythonParser()
+        '.py': PyParser()
     }
 
+#metoda do odczytu plików
     def readFiles(self, files):
+        print(files)
+
+        '''
+        dla kazdej nazwy pliku wybieramy ścieżkę do tego pliku i rozszeżenie
+        wybranie odpowiedniego parsera w zależności od rozszeżenia pliku
+        otworzenie pliku do odczytu
+        usunięcie komentarzy w pliku
+        znalezienie importów/includów
+        sprawdzenie czy pliki istnieją w podenym zestawie plików 
+            (czy odwołanie jest do pliku który został podany na wejściu)
+        stworzenie tablicy z zależnościami między plikami
+        '''
         for fileName in files:
             filepath, extension = os.path.splitext(fileName)
 
@@ -22,5 +38,19 @@ class FileReader:
 
             file = open(fileName, 'r')
             file = parser.removeComments(file.read())
-            self.dependencies[fileName] = parser.findDependencies(file)
-            print(self.dependencies)
+            dependencies = parser.findDependencies(file)
+            dependencies = self.checkFilesExistance(files, dependencies)
+            self.dependencies[fileName] = dependencies
+        #print (self.dependencies)
+
+    '''
+    metoda do sprawdzania czy podany plik istnieje w zestawie plików wejściowych
+    '''
+    def checkFilesExistance(self, files, dependencies):
+        existedFiles = []
+        for dep in dependencies:
+            depPath = os.path.abspath(dep)
+            print(depPath)
+            if depPath in files:
+                existedFiles.append(depPath)
+        return existedFiles
