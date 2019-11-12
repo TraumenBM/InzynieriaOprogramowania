@@ -27,11 +27,6 @@ class IU:
         for path, subdirs, files in os.walk(root):
             for name in files:
                 osSpecificFiles.append(os.path.join(path, name))
-
-        #zamienianie ścieżek na specyficzne dla danego systemu operacyjnego
-        for file in files:
-            fileName = re.sub(r'[\\|/]', os.path.sep, file, 0)
-            osSpecificFiles.append(fileName)
         fr = filereader.FileReader() #inicjowanie klasy fileReader
         fr.readFiles(osSpecificFiles)
 
