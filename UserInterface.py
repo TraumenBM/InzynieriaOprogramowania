@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import os
 import re
-from tkinter import *
-from tkinter import filedialog
-# from Tkinter import *
-# import tkFileDialog as filedialog
+# from tkinter import *
+# from tkinter import filedialog
+from Tkinter import *
+import tkFileDialog as filedialog
 import FileReader as filereader
 
 #klasa interfejs użytkownika
@@ -30,7 +30,7 @@ class IU:
                 file = os.path.abspath(name)
                 osSpecificFiles.append(file)
         fr = filereader.FileReader() #inicjowanie klasy fileReader
-        fr.readFiles(osSpecificFiles)
+        fr.readFiles(osSpecificFiles, root)
 
     def exit(self) :
         sys.exit()
